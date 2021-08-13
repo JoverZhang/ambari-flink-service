@@ -36,32 +36,20 @@
 #==============================================================================
 # Common
 #==============================================================================
-
 jobmanager.rpc.address: localhost
-
 jobmanager.rpc.port: 6123
-
-jobmanager.heap.mb: 1024
-
-taskmanager.heap.mb: 1024
-
-taskmanager.numberOfTaskSlots: 1
-
+jobmanager.memory.process.size: 1024m
+taskmanager.memory.process.size: 1024m
+taskmanager.numberOfTaskSlots: 4
 parallelism.default: 1
 
 #==============================================================================
 # Web Frontend
 #==============================================================================
-
-# The port under which the web-based runtime monitor listens.
-# A value of -1 deactivates the web server.
-jobmanager.web.port: 8081
-
-# The port uder which the standalone web client
-# (for job upload and submit) listens.
-
-webclient.port: 8080
-
+rest.port: 8081
+rest.address: 0.0.0.0
+rest.bind-port: 8080-8090
+rest.bind-address: 0.0.0.0
 #==============================================================================
 # Streaming state checkpointing
 #==============================================================================
@@ -71,8 +59,8 @@ webclient.port: 8080
 #
 # Supported backends: jobmanager, filesystem
 
-state.backend: jobmanager
-
+#state.backend: jobmanager
+jobmanager.execution.failover-strategy: region
 # Directory for storing checkpoints in a flink supported filesystem
 # Note: State backend must be accessible from the JobManager, use file://
 # only for local setups.
@@ -113,7 +101,7 @@ state.backend: jobmanager
 # via keys 'fs.hdfs.hdfsdefault' and 'fs.hdfs.hdfssite'.
 #
 # fs.hdfs.hadoopconf: /path/to/hadoop/conf/
-env.java.home: /usr/jdk64/jdk1.8.0_77/jre
+env.java.home: /usr/java/jdk1.8.0_301-amd64
 taskmanager.memory.fraction: 0.6
 env.java.opts: -XX:+UseG1GC
   </value>
